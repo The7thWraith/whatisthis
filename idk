@@ -1,0 +1,128 @@
+import math
+import numpy as np
+from numba import vectorize
+from numba import jit
+from timeit import default_timer as timer
+import time
+import pyautogui
+
+
+
+
+@vectorize(['float32(float32, float32)'], target='cuda')
+def Add(a, b):
+  return a + b
+
+N = 100000
+A = np.ones(N, dtype=np.float32)
+B = np.ones(A.shape, dtype=A.dtype)
+C = np.empty_like(A, dtype=A.dtype)
+
+
+C = Add(A, B)
+
+
+def calcAnsM(num1, num2):
+    multi = num1 * num2
+    return multi
+
+def calcAnsD(num1, num2):
+    div = num1 / num2
+    return div
+
+def calcAnsA(num1, num2):
+    add = num1 + num2
+    return add
+
+def calcAnsS(num1, num2):
+    sub = num1 - num2
+    return sub
+
+def calcAnsS(num1, num2):
+    sub = num1 - num2
+    return sub
+
+def calcAnsE(num1, num2):
+    exp = num1 ** num2
+    return exp
+
+def calcAnsP(num1, num2):
+    pyth = num1 ** 2 + num2 ** 2
+    pyth2 = math.sqrt(pyth)
+    return pyth2
+
+
+
+
+print("Welcome to iremovedthisbecauseithadmyname's easy math!")
+type = input("What type of math do you need to do? [multiplication (m), division (d), addition (a), subtraction (s), exponents, (e) pythagorean theorem (p)]")
+
+num1 = int(input("What is the first number?"))
+num2 = int(input("What is the second number?"))
+
+
+if type == "multiplication" or type == "m":
+    print(str(calcAnsM(num1, num2)))
+    calcAnsFinal = str(calcAnsM(num1, num2))
+
+elif type == "division" or type == "d":
+    print(str(calcAnsD(num1, num2)))
+    calcAnsFinal = str(calcAnsD(num1, num2))
+
+elif type == "addition" or type == "a":
+    print(str(calcAnsA(num1, num2)))
+    calcAnsFinal = str(calcAnsA(num1, num2))
+
+
+elif type == "subtraction" or type == "s":
+    print(str(calcAnsS(num1, num2)))
+    calcAnsFinal = str(calcAnsS(num1, num2))
+
+elif type == "exponents" or type == "e":
+    print(str(calcAnsE(num1, num2)))
+    calcAnsFinal = str(calcAnsE(num1, num2))
+
+elif type == "pythagorean theorem" or type == "p":
+    print(str(calcAnsP(num1, num2)))
+    calcAnsFinal = str(calcAnsP(num1, num2))
+
+
+else:
+    print("*visible confusion*")
+
+# Program to check if a number is prime or not
+if type == "exponents" or type == "e":
+    num = int(calcAnsFinal) - 1
+
+    # To take input f
+    # from the user
+    # num = int(input("Enter a number: "))
+
+    # prime numbers are greater than 1
+    if num > 1:
+        # check for factors
+        for i in range(2, num):
+            if (num % i) == 0:
+                print(num, " is not a prime number")
+                print(i, "times", num // i, "is", num)
+                break
+        else:
+            print(num, "is a prime number")
+
+    # if input number is less than
+    # or equal to 1, it is not prime
+    else:
+        print(num, "is not a prime number")
+
+#creating data history
+#text_file = open("Easy_Math_Data_History", "a+")
+#text_file.write("\nNumbers:\n")
+#text_file.write(str(num1) + "\n")
+#text_file.write(str(num2) + "\n")
+#text_file.write("Answer:")
+#text_file.write(calcAnsFinal + "\n")
+#text_file.close()
+
+#text_file = open("Easy_Math_Data_History", "r")
+#print(text_file.read())
+#text_file.close()
